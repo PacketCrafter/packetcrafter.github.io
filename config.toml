@@ -12,7 +12,7 @@ noClasses = false
 # --- Optional Theme Parameters (Recommended) ---
 [params]
     # Terminal theme options:
-  themeColor = "orange"         # choices: orange, blue, red, green, pink, yellow
+  themeColor = "green"         # choices: orange, blue, red, green, pink, yellow
   fullWidthTheme = false
   centerTheme = true
   readingTime = true
