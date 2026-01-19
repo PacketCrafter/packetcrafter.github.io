@@ -4,7 +4,7 @@ title = "Network DevOps by Isaias Luna"
 theme = "blowfish"
 
 # Blowfish requires specific pagination and markup settings
-paginate = 10
+pagerSize = 10
 
 [markup]
   [markup.goldmark]
