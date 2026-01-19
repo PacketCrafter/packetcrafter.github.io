@@ -1,0 +1,6 @@
+/* Ensure Mermaid diagrams use the full container width */
+.mermaid svg {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+}

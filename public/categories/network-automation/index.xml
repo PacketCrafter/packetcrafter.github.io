@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network Automation on Professional Portfolio</title>
+    <link>//localhost:1313/categories/network-automation/</link>
+    <description>Recent content in Network Automation on Professional Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</managingEditor>
+    <webMaster>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</webMaster>
+    <copyright>© 2026 Isaias Luna Villatoro</copyright>
+    <lastBuildDate>Sun, 11 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/categories/network-automation/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Automating Juniper Junos with Ansible and NETCONF</title>
+      <link>//localhost:1313/automation/ansible-juniper-vlan-configuration/</link>
+      <pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate>
+      <author>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</author>
+      <guid>//localhost:1313/automation/ansible-juniper-vlan-configuration/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

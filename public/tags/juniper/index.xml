@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Juniper on Professional Portfolio</title>
+    <link>//localhost:1313/tags/juniper/</link>
+    <description>Recent content in Juniper on Professional Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</managingEditor>
+    <webMaster>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</webMaster>
+    <copyright>© 2026 Isaias Luna Villatoro</copyright>
+    <lastBuildDate>Sun, 11 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/juniper/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Automating Juniper Junos with Ansible and NETCONF</title>
+      <link>//localhost:1313/automation/ansible-juniper-vlan-configuration/</link>
+      <pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate>
+      <author>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</author>
+      <guid>//localhost:1313/automation/ansible-juniper-vlan-configuration/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>The AI Revolution: Juniper Mist vs. Traditional Networking</title>
+      <link>//localhost:1313/blog/juniper-mist-vs-traditional/</link>
+      <pubDate>Sun, 11 Jan 2026 00:00:00 +0000</pubDate>
+      <author>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</author>
+      <guid>//localhost:1313/blog/juniper-mist-vs-traditional/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/blog/juniper-mist-vs-traditional/feature.jpg" />
+    </item>
+    
+    <item>
+      <title>Operationalizing Network Backups: SolarWinds Kiwi CatTools Implementation</title>
+      <link>//localhost:1313/automation/network-backup-tool/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      <author>isaiasluna15949@gmail.com (Isaias Luna Villatoro)</author>
+      <guid>//localhost:1313/automation/network-backup-tool/</guid>
+      <description>Revitalized dormant software assets by programming Kiwi CatTools to automate configuration backups and email reporting for campus-wide network infrastructure.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
