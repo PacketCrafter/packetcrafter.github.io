@@ -1,37 +1,27 @@
-baseURL = "https://packetcrafter.github.io"
+baseURL = "https://packetcrafter.github.io/"
 languageCode = "en-us"
 title = "Network DevOps by Isaias Luna"
+theme = "blowfish"
 
-# Tell Hugo to use the new theme
-theme = "terminal" 
+# Blowfish requires specific pagination and markup settings
+paginate = 10
 
-# --- Required for Syntax Highlighting ---
-[markup.highlight]
-noClasses = false
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true # Required for Mermaid diagrams and complex HTML
 
-# --- Optional Theme Parameters (Recommended) ---
 [params]
-    # Terminal theme options:
-  themeColor = "green"         # choices: orange, blue, red, green, pink, yellow
-  fullWidthTheme = false
-  centerTheme = true
-  readingTime = true
-  Toc = true
-  TocTitle = "Table of Contents"
+  colorScheme = "blowfish" # The actual Blowfish parameter (not themeColor)
+  showTableOfContents = true
+  description = "Network Automation and DevOps Portfolio"
 
-[params.logo]
-  logoText = "Isaias / NetDevOps"
-  logoHomeLink = "/"
-
-# --- MENU ---
-[[menu.main]]
-  identifier = "posts"
-  name = "Posts"
-  url = "/posts/"
-  weight = 1
-
-[[menu.main]]
-  identifier = "about"
-  name = "About"
-  url = "/about/"
-  weight = 2
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
