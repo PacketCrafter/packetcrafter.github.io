@@ -4,8 +4,8 @@ date: 2026-01-19
 draft: false
 description: "A technical deep-dive into re-architecting firewall high availability for stability and predictable failover."
 tags: ["Palo Alto Networks", "Network Security", "High Availability", "Automation"]
-series: ["Infrastructure Migrations"]
-showTaxonomies: true
+#series: ["Infrastructure Migrations"]
+
 ---
 
 ## Overview
