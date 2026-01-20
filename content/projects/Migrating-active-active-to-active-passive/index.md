@@ -1,6 +1,6 @@
 ---
 title: "Deterministic High Availability: Migrating from Active/Active to Active/Passive"
-date: 2026-01-19
+date: 2026-01-18
 draft: false
 description: "A technical deep-dive into re-architecting firewall high availability for stability and predictable failover."
 tags: ["Palo Alto Networks", "Network Security", "High Availability", "Automation"]
