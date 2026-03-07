@@ -1,7 +1,7 @@
 ---
 title: "Automating Infoblox IPAM with Ansible"
 description: "Streamlining DHCP scopes and IPv4 reservations using the NIOS modules."
-date: 2024-03-20
+date: 2026-03-07
 tags: ["Ansible", "Infoblox", "Automation", "Python", "IPAM"]
 categories: ["Network Automation"]
 series: ["Infrastructure as Code"]
