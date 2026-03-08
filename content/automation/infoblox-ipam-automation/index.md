@@ -11,5 +11,12 @@ draft: false
 
 ## Infrastructure Overview
 
-To manage a modern enterprise network, the source of truth (IPAM) must be integrated into the CI/CD pipeline. 
+To manage a modern enterprise network, the source of truth (IPAM) must be integrated into the CI/CD pipeline. This workflow leverages Ansible Automation Platform (AAP) to drive Infoblox NIOS configurations.
 
+```mermaid
+graph TD
+    A[AAP Survey / YAML Input] --> B{Ansible Controller}
+    B --> C[Validate & Parse YAML]
+    C --> D[Calculate DHCP Range]
+    D --> E[NIOS API Call]
+    E --> F[(Infoblox Grid)]
