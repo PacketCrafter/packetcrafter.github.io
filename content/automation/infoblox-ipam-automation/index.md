@@ -4,6 +4,9 @@ description: "Streamlining DHCP scopes and IPv4 reservations using the NIOS modu
 date: 2026-03-12
 tags: ["Ansible", "Infoblox", "Automation", "Python", "IPAM"]
 categories: ["Network Automation"]
+featureImage: "images/ansible-infoblox-header.png"
+cardView: true
+showFeatureImage: true
 showTableOfContents: false
 draft: false
 ---
