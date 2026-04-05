@@ -1,6 +1,10 @@
 ---
 title: "Automating Infoblox IPAM with Ansible"
 description: "Streamlining DHCP scopes and IPv4 reservations using the NIOS modules."
+title: "The AI Revolution: Juniper Mist vs. Traditional Networking"
+date: 2026-04-04
+thumbnail: "feature.png"
+showHero: true
 date: 2026-03-12
 tags: ["Ansible", "Infoblox", "Automation", "Python", "IPAM"]
 categories: ["Network Automation"]
