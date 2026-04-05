@@ -1,10 +1,12 @@
 ---
 title: "The Evolution of Connectivity: From CLI to NetDevOps"
-date: 2026-04-05T11:00:00Z
+date: 2026-04-05
+thumbnail: "feature.png"
+showHero: true
 draft: false
 tags: ["NetDevOps", "Automation", "CI-CD", "Networking"]
 series: ["Network Architecture"]
-summary: "Tracing the shift from manual CLI configuration to software-centric, automated network infrastructure."
+description: "Tracing the shift from manual CLI configuration to software-centric, automated network infrastructure."
 ---
 
 ## The Evolution of Connectivity: From CLI to NetDevOps
@@ -69,14 +71,6 @@ The journey of the network engineer can be divided into three distinct eras:
 
 In the early days, networking was all about the physical layer. Engineers spent their time crimping cables and configuring bulky, expensive hardware. Each vendor had a proprietary operating system, and interoperability was a constant struggle. Knowledge of the OSI Model was the primary skill set.
 2. The CLI & Certification Era (2000s – 2010s)
-
-As the internet exploded, the "CLI Warrior" was born. Network engineers became experts in typing commands into terminal emulators. This era was defined by:
-
-    Manual Configuration: Changing a VLAN meant logging into 50 different switches manually.
-
-    Snowflake Networks: Every router ended up with slightly different configurations, making troubleshooting a nightmare.
-
-    The Rise of Certifications: CCNA, CCNP, and CCIE became the gold standards of professional validation.
 
 3. The Software-Defined Era (2015 – Present)
 
