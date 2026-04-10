@@ -27,7 +27,6 @@ At scale, the cracks show fast: STP becomes a liability, bokcing redundant paths
 The device responsible for this wrapping and unwrapping is called a VTEP (VXLAN Tunnel Endpoint) -- typically a physical switch or vitrual switch on a hypervisor. When a frame leaves a host, the local VTEP encapsulates it: the original ethernet frame gets a 24-bit VNI header stamped on it, then the whole thing is wrapped in a UDP packet (destination port 4789) and shipped across the IP underlay as ordinary routed traffic. On the far end, the remote VTEP strips the outer headers and delivers the original frame to the destination, the hosts on either side have no actual idea a tunnel exists. One practical note: make sure UDP 4789 is permitted on any ACLs or firewalls sitting in your underlay path, or you overlay traffic silently disappears.
 
 {{< figure src="VLAN_VXLAN.PNG" title="VLAN-VXLAN Overview" caption=" VLXAN process" alt="VXLAN Diagram" class="mx-auto" >}}
----
 
 ## Why VXLAN Needs EVPN
 VXLAN defines the "data plane" (how the packet is wrapped), but it doesn't solve the "control plane" problem. Early VXLAN relied on flood-and-learn (multicast), which is inefficient and difficult to automate.
