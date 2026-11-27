@@ -9,12 +9,16 @@
   var GROUND_Y = 230;
   var STAND_H = 62;
   var DUCK_H = 30;
-  // Per-frame (not per-second) values, tuned for ~60fps requestAnimationFrame
-  // ticks: JUMP_VELOCITY is the initial upward speed in px/frame, GRAVITY the
-  // downward acceleration added each frame. Total airtime = 2*|JUMP_VELOCITY|/GRAVITY.
+  // Tuned at a 60fps baseline. Every per-tick update is multiplied by `dt`
+  // (see loop()), where dt=1 means "one 60fps-equivalent tick elapsed" —
+  // this keeps gameplay speed consistent in real time whether the display
+  // (and so requestAnimationFrame) runs at 60Hz, 90Hz, or 120Hz (e.g. an
+  // iPhone Pro's ProMotion screen), instead of the game running 2x speed
+  // on a 120Hz device just because rAF fires twice as often.
   var GRAVITY = 0.55;
   var JUMP_VELOCITY = -10;
   var BASE_SPEED = 4.2;
+  var lastTimestamp = null;
 
   var canvas, ctx;
   var state = "select"; // select | playing | quiz | gameover
@@ -242,11 +246,11 @@
     return { x: player.x + 8, y: player.y - player.h, w: player.w - 16, h: player.h };
   }
 
-  function update() {
+  function update(dt) {
     if (state !== "playing") return;
-    elapsedFrames++;
+    elapsedFrames += dt;
     speed = BASE_SPEED + Math.min(elapsedFrames / 900, 1) * 3.5;
-    score += speed * 0.045;
+    score += speed * 0.045 * dt;
 
     if (score >= nextQuizScore) {
       triggerQuiz();
@@ -255,8 +259,8 @@
 
     // physics
     if (!player.onGround) {
-      player.vy += GRAVITY;
-      player.y += player.vy;
+      player.vy += GRAVITY * dt;
+      player.y += player.vy * dt;
       if (player.y >= GROUND_Y) {
         player.y = GROUND_Y;
         player.vy = 0;
@@ -264,14 +268,14 @@
       }
     }
 
-    player.frameTimer++;
+    player.frameTimer += dt;
     if (player.frameTimer > 7) {
       player.frameTimer = 0;
       player.frame = player.frame === 0 ? 1 : 0;
     }
 
     // spawn
-    spawnTimer++;
+    spawnTimer += dt;
     if (spawnTimer >= nextSpawnIn) {
       spawnObstacleOrCollectible();
       spawnTimer = 0;
@@ -282,7 +286,7 @@
     var hb = playerHitbox();
     for (var i = obstacles.length - 1; i >= 0; i--) {
       var ob = obstacles[i];
-      ob.x -= speed;
+      ob.x -= speed * dt;
       if (ob.x + ob.w < -10) { obstacles.splice(i, 1); continue; }
       var obRect = { x: ob.x, y: ob.y, w: ob.w, h: ob.h };
       if (rectsOverlap(hb, obRect)) {
@@ -293,7 +297,7 @@
 
     for (var j = collectibles.length - 1; j >= 0; j--) {
       var c = collectibles[j];
-      c.x -= speed;
+      c.x -= speed * dt;
       if (c.x + c.w < -10) { collectibles.splice(j, 1); continue; }
       if (rectsOverlap(hb, c)) {
         score += 25;
@@ -407,8 +411,18 @@
     }
   }
 
-  function loop() {
-    update();
+  function loop(timestamp) {
+    var dt = 1;
+    if (lastTimestamp !== null) {
+      var elapsedMs = timestamp - lastTimestamp;
+      // Normalize to "ticks at a 60fps baseline"; clamp so a background
+      // tab / locked screen resuming doesn't apply one giant catch-up step.
+      dt = elapsedMs / (1000 / 60);
+      if (!isFinite(dt) || dt <= 0) dt = 1;
+      dt = Math.min(dt, 3);
+    }
+    lastTimestamp = timestamp;
+    update(dt);
     render();
     requestAnimationFrame(loop);
   }
