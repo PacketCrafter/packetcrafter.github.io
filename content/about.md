@@ -19,14 +19,33 @@ I am a collaborative and mission-driven Network DevOps Engineer with expertise i
 ### Professional Experience
 
 **DevOps Network Engineer** · University of Texas at San Antonio · *February 2023 – Present*
-* Developed Python/Ansible automation for IP, DNS, DHCP, and firmware operations.
-* Built a Python-based bulk access-point renaming workflow with rollback/audit controls, automating 500+ Juniper Mist AP renames across multiple campus buildings.
+
+*2023 — Campus Network & Wireless Modernization*
+* Supported a major campus wireless and switching modernization effort spanning hundreds of access points and switches across multiple UTSA buildings — including a first wireless phase of 400 APs plus 100 additional access points, hardware staging, Mist onboarding, and Infoblox/Forescout integration.
+* Contributed to an outdoor wireless deployment covering roughly 100 outdoor access points, handling PoE requirements, switch-port configuration, and IPAM/NAC integration.
+* Supported migrating UTSA's remote-access VPN architecture to Palo Alto GlobalProtect, including SAML/SSO integration, certificate migration, and F5 load-balancing dependencies.
+
+*2024 — Network DevOps, F5 & Firewall Engineering*
+* Developed Python/Ansible automation for IP, DNS, DHCP, and firmware operations, and built a Python-based bulk access-point renaming workflow with rollback/audit controls, automating 500+ Juniper Mist AP renames across multiple campus buildings.
 * Built a campus-wide IP-CLOS architecture on Juniper Mist BGP EVPN/VXLAN, modernizing 500+ access points and edge switches onto Juniper EX4400 Access/QFX5700 Core switches and Mist AP47s.
 * Led border firewall modernization (PA-5260 → PA-5440) with active/passive HA, hardware RMA coordination, and a data-center relocation completed with zero reported service impact.
-* Manage security posture via Palo Alto Panorama; migrated firewalls from Fortinet/Juniper SRX to Palo Alto and led emergency PAN-OS patching across three data-center sites for a critical CVE.
+* Managed security posture via Palo Alto Panorama; migrated firewalls from Fortinet/Juniper SRX to Palo Alto and led emergency PAN-OS patching across three data-center sites for a critical CVE.
 * Upgraded 5 enterprise F5 BIG-IP HA pairs to a current release using Ansible automation.
 * Migrated legacy NAC policies to Cisco ISE and deployed 802.1X across Mist enterprise environments.
 * Implemented a routed data-center management network, migrating UPS, PDU, and environmental-management infrastructure from Layer-2-only to routable connectivity.
+
+*2025 — Security Response & Platform Modernization*
+* Participated in emergency remediation of a critical Palo Alto CVE, coordinating PAN-OS patching across three data-center firewall sites following interim ACL mitigations.
+* Developed a detailed migration and validation strategy for a further PA-5260 → PA-5440 firewall transition — Panorama staging, configuration backups, BGP/OSPF validation, failover/failback testing, and rollback readiness.
+* Supported F5 BIG-IP platform migration toward the 17.x release line, including firmware staging, certificate checks, and application validation.
+* Served as an escalation point for application/load-balancer incidents, isolating a production issue to a missing application-endpoint port rather than the F5 tier.
+* Supported network integration for a large ClearPass NAC deployment across multiple administrative and policy-service nodes, validating VLAN/subnet assignments.
+
+*2026 (YTD) — Automation, Architecture & API-Driven Engineering*
+* Expanded network automation into Python/API-driven infrastructure engineering, building workflows against the Juniper Apstra API to extract and normalize blueprint and device-inventory data across multiple data-center fabrics — one blueprint alone yielding 341 normalized device records.
+* Built F5 certificate automation through Ansible, and developed automation workflows spanning Ansible, Python, REST APIs, and GitLab across F5, Infoblox, Mist, and Apstra.
+* Built a refined Python-based Juniper Mist AP bulk-renaming tool with dry-run mode, secure token handling, and rollback/audit CSV output — processing 246 AP renames across three campus buildings.
+* Participated in UTSA's emergency response to a university-wide certificate trust-chain issue, identifying affected infrastructure and application certificates and helping transition impacted services to a new certificate authority.
 
 **Network Design Engineer** · Endeavor Managed Services · *August 2022 – February 2023*
 * Created design workbooks, network design outlines, and high-/low-level diagrams.
