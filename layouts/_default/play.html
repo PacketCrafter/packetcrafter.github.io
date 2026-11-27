@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="max-w-4xl mx-auto px-2 py-8">
+  <h1 class="text-3xl font-extrabold text-neutral-800 dark:text-neutral-200 mb-2">{{ .Title }}</h1>
+  <p class="text-neutral-600 dark:text-neutral-400 mb-6">{{ .Description }}</p>
+
+  <div id="nej-game-wrap" class="relative w-full rounded-lg overflow-hidden border border-neutral-300 dark:border-neutral-600" style="background:#12141a;">
+    <div id="nej-class-select" style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:stretch; padding:28px 16px;">
+      <p style="width:100%; text-align:center; color:#9aa0ad; font-family:monospace; margin-bottom:8px;">
+        CHOOSE YOUR CLASS &middot; Best score so far: <span id="nej-best-preview">0</span>
+      </p>
+    </div>
+    <canvas id="nej-canvas" width="800" height="300" style="width:100%; height:auto; image-rendering: pixelated; display:block;"></canvas>
+    <div id="nej-controls" style="display:none; justify-content:center; gap:16px; padding:12px; background:rgba(0,0,0,0.3);">
+      <button id="nej-btn-duck" class="nej-ctrl-btn">⬇ Duck</button>
+      <button id="nej-btn-jump" class="nej-ctrl-btn">⬆ Jump</button>
+    </div>
+  </div>
+
+  <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-4">
+    Keyboard: <strong>Space</strong> or <strong>↑</strong> to jump, <strong>↓</strong> to duck under hanging cables. On mobile, use the on-screen buttons.
+    Jump server racks, CVEs, and latency spikes; duck under low-hanging cables; grab packets for bonus points.
+  </p>
+</div>
+
+<style>
+  .nej-class-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.03);
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 14px 18px;
+    min-width: 160px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .nej-class-btn:hover { background: rgba(255,255,255,0.08); }
+  .nej-class-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; margin-bottom: 4px; }
+  .nej-class-name { font-weight: 700; color: #e8e8ec; font-size: 0.95rem; }
+  .nej-class-tool { font-size: 0.78rem; color: #9aa0ad; }
+  .nej-ctrl-btn {
+    background: rgba(255,255,255,0.08);
+    color: #e8e8ec;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-weight: 700;
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
+  .nej-ctrl-btn:active { background: rgba(255,255,255,0.2); }
+</style>
+<script src="/js/network-engineer-journey.js"></script>
+{{ end }}
