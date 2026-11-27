@@ -10,6 +10,7 @@
       </p>
     </div>
     <canvas id="nej-canvas" width="800" height="300" style="width:100%; height:auto; image-rendering: pixelated; display:block;"></canvas>
+    <div id="nej-quiz" class="nej-quiz-overlay" style="display:none;"></div>
     <div id="nej-controls" style="display:none; justify-content:center; gap:16px; padding:12px; background:rgba(0,0,0,0.3);">
       <button id="nej-btn-duck" class="nej-ctrl-btn">⬇ Duck</button>
       <button id="nej-btn-jump" class="nej-ctrl-btn">⬆ Jump</button>
@@ -19,6 +20,7 @@
   <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-4">
     Keyboard: <strong>Space</strong> or <strong>↑</strong> to jump, <strong>↓</strong> to duck under hanging cables. On mobile, use the on-screen buttons.
     Jump server racks, CVEs, and latency spikes; duck under low-hanging cables; grab packets for bonus points.
+    Every so often you'll hit a quiz checkpoint with a question for your class — answer right for bonus points.
   </p>
 </div>
 
@@ -51,6 +53,54 @@
     font-size: 0.95rem;
   }
   .nej-ctrl-btn:active { background: rgba(255,255,255,0.2); }
+
+  .nej-quiz-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .nej-quiz-q {
+    color: #e8e8ec;
+    font-weight: 700;
+    font-size: 1.1rem;
+    max-width: 520px;
+  }
+  .nej-quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 560px;
+  }
+  .nej-quiz-opt {
+    background: rgba(255,255,255,0.06);
+    color: #e8e8ec;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+  }
+  .nej-quiz-opt:hover:not(:disabled) { background: rgba(255,255,255,0.14); }
+  .nej-quiz-opt:disabled { cursor: default; opacity: 0.85; }
+  .nej-quiz-opt.nej-correct { border-color: #8cd296; background: rgba(140,210,150,0.2); }
+  .nej-quiz-opt.nej-incorrect { border-color: #eb5757; background: rgba(235,87,87,0.2); }
+  .nej-quiz-feedback {
+    color: #9aa0ad;
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+  @media (max-width: 520px) {
+    .nej-quiz-options { grid-template-columns: 1fr; }
+  }
 </style>
 <script src="/js/network-engineer-journey.js"></script>
 {{ end }}

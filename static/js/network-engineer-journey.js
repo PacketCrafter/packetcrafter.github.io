@@ -17,16 +17,52 @@
   var BASE_SPEED = 4.2;
 
   var canvas, ctx;
-  var state = "select"; // select | ready | playing | gameover
+  var state = "select"; // select | playing | quiz | gameover
   var selectedClass = null;
   var sprites = {};
   var imagesLoaded = 0, imagesTotal = 0;
 
   var CLASSES = [
     { id: "network", label: "Network Engineer", tool: "Ethernet cable", color: "#5ab4f0", sheet: "/img/game/sprite-network.png" },
-    { id: "security", label: "Security Engineer", tool: "Firewall shield", color: "#eb5757", sheet: "/img/game/sprite-security.png" },
-    { id: "devops", label: "DevOps Engineer", tool: "Automation wrench", color: "#8cd296", sheet: "/img/game/sprite-devops.png" }
+    { id: "security", label: "Network Security Engineer", tool: "Firewall shield", color: "#eb5757", sheet: "/img/game/sprite-security.png" },
+    { id: "devops", label: "Network DevOps Engineer", tool: "Automation wrench", color: "#8cd296", sheet: "/img/game/sprite-devops.png" }
   ];
+
+  var QUIZ_SCORE_INTERVAL = 160;
+  var QUIZ_BONUS = 50;
+
+  var QUESTION_BANKS = {
+    network: [
+      { q: "Which protocol does traceroute commonly rely on to map a packet's path?", options: ["ICMP", "FTP", "SNMP", "SMTP"], correct: 0 },
+      { q: "What is the default administrative distance of OSPF?", options: ["90", "100", "110", "120"], correct: 2 },
+      { q: "Which VLAN carries untagged traffic on a trunk by default?", options: ["VLAN 1", "VLAN 10", "VLAN 100", "VLAN 999"], correct: 0 },
+      { q: "What does ARP resolve?", options: ["IP address to MAC address", "MAC address to IP address", "Hostname to IP address", "Port to service"], correct: 0 },
+      { q: "Which of these is a Layer 3 device?", options: ["Switch", "Hub", "Router", "Repeater"], correct: 2 },
+      { q: "What is the main purpose of BGP's AS_PATH attribute?", options: ["Loop prevention between autonomous systems", "Encrypting routing updates", "Load balancing MAC addresses", "DNS resolution"], correct: 0 },
+      { q: "In EVPN-VXLAN, what does VTEP stand for?", options: ["VXLAN Tunnel End Point", "Virtual Trunking Ethernet Protocol", "VLAN Trunk Endpoint Path", "Virtual Topology Exchange Point"], correct: 0 },
+      { q: "Which port does HTTPS use by default?", options: ["80", "443", "22", "3389"], correct: 1 }
+    ],
+    security: [
+      { q: "What does a stateful firewall track that a stateless one doesn't?", options: ["Connection/session state", "Packet size only", "DNS queries only", "Source IP only"], correct: 0 },
+      { q: "What's the primary purpose of a DMZ in network design?", options: ["Isolate public-facing services from the internal network", "Increase VLAN count", "Encrypt all traffic", "Speed up routing"], correct: 0 },
+      { q: "Which best describes a zero-day vulnerability?", options: ["A flaw unknown to the vendor with no patch yet available", "A bug fixed on release day", "A vulnerability only affecting new deployments", "A fully patched CVE"], correct: 0 },
+      { q: "What does CVSS attempt to measure?", options: ["Severity of a vulnerability", "Number of CVEs per vendor", "Patch release schedule", "Network bandwidth usage"], correct: 0 },
+      { q: "Which protocol is commonly exploited in a man-in-the-middle spoofing attack on a LAN?", options: ["ARP", "BGP", "OSPF", "NTP"], correct: 0 },
+      { q: "What is the principle of least privilege?", options: ["Granting only the access needed to perform a task", "Giving all users admin rights", "Encrypting least-used data", "Disabling all firewall rules"], correct: 0 },
+      { q: "What does IDS stand for?", options: ["Intrusion Detection System", "Internet Data Security", "Internal Defense Server", "Identity Directory Service"], correct: 0 },
+      { q: "What's a common mitigation for an exposed management interface?", options: ["Restrict access to a dedicated management network", "Expose it on every interface for visibility", "Disable all logging", "Use default credentials for simplicity"], correct: 0 }
+    ],
+    devops: [
+      { q: "What does IaC stand for?", options: ["Infrastructure as Code", "Internet Access Control", "Interface as Component", "Integrated Automation Client"], correct: 0 },
+      { q: "In Ansible, what file commonly defines the hosts a playbook runs against?", options: ["Inventory file", "Dockerfile", "Vagrantfile", "Procfile"], correct: 0 },
+      { q: "What's the main benefit of a CI/CD pipeline for network changes?", options: ["Automatically testing and deploying changes consistently", "Manually logging into each device", "Replacing version control", "Eliminating the need for testing"], correct: 0 },
+      { q: "What does 'idempotent' mean for an automation task?", options: ["Running it multiple times produces the same result", "It only runs once, ever", "It requires root access", "It can't be version controlled"], correct: 0 },
+      { q: "Which tool is standard for version-controlling network configuration changes?", options: ["Git", "FTP", "Telnet", "SNMP"], correct: 0 },
+      { q: "What's a common use of Jinja2 templating in network automation?", options: ["Generating device configs from variables", "Encrypting SSH sessions", "Replacing BGP", "Monitoring CPU usage only"], correct: 0 },
+      { q: "What does AAP commonly refer to in Red Hat's automation ecosystem?", options: ["Ansible Automation Platform", "Automated Access Point", "Application Access Protocol", "Advanced Automation Pipeline"], correct: 0 },
+      { q: "What's a key goal of NetDevOps?", options: ["Applying software development practices to network operations", "Removing all human oversight", "Replacing routers with servers", "Avoiding version control"], correct: 0 }
+    ]
+  };
 
   var OBSTACLE_TYPES = [
     { id: "rack", kind: "ground", img: "/img/game/obstacle-rack.png", w: 32, h: 56, label: "Server Rack" },
@@ -36,6 +72,7 @@
   ];
 
   var player, obstacles, collectibles, score, highScore, speed, spawnTimer, nextSpawnIn, elapsedFrames;
+  var nextQuizScore, askedQuestionIndexes, currentQuiz, quizFeedback;
 
   function loadImage(src) {
     imagesTotal++;
@@ -82,6 +119,77 @@
     nextSpawnIn = 70;
     elapsedFrames = 0;
     highScore = getHighScore();
+    nextQuizScore = QUIZ_SCORE_INTERVAL;
+    askedQuestionIndexes = [];
+    currentQuiz = null;
+    quizFeedback = null;
+    var quizWrap = document.getElementById("nej-quiz");
+    if (quizWrap) quizWrap.style.display = "none";
+  }
+
+  function pickQuizQuestion() {
+    var bank = QUESTION_BANKS[selectedClass] || [];
+    if (bank.length === 0) return null;
+    if (askedQuestionIndexes.length >= bank.length) askedQuestionIndexes = [];
+    var available = [];
+    for (var i = 0; i < bank.length; i++) {
+      if (askedQuestionIndexes.indexOf(i) === -1) available.push(i);
+    }
+    var idx = available[Math.floor(Math.random() * available.length)];
+    askedQuestionIndexes.push(idx);
+    return { index: idx, data: bank[idx] };
+  }
+
+  function triggerQuiz() {
+    var picked = pickQuizQuestion();
+    if (!picked) return;
+    currentQuiz = picked;
+    quizFeedback = null;
+    state = "quiz";
+    renderQuizUI();
+  }
+
+  function renderQuizUI() {
+    var wrap = document.getElementById("nej-quiz");
+    if (!wrap || !currentQuiz) return;
+    var q = currentQuiz.data;
+    var html = '<div class="nej-quiz-q">' + q.q + '</div><div class="nej-quiz-options">';
+    q.options.forEach(function (opt, i) {
+      html += '<button class="nej-quiz-opt" data-i="' + i + '">' + opt + '</button>';
+    });
+    html += '</div><div class="nej-quiz-feedback" id="nej-quiz-feedback"></div>';
+    wrap.innerHTML = html;
+    wrap.style.display = "flex";
+    Array.prototype.forEach.call(wrap.querySelectorAll(".nej-quiz-opt"), function (btn) {
+      btn.addEventListener("click", function () {
+        answerQuiz(parseInt(btn.getAttribute("data-i"), 10));
+      });
+    });
+  }
+
+  function answerQuiz(choiceIndex) {
+    if (state !== "quiz" || !currentQuiz) return;
+    var correct = choiceIndex === currentQuiz.data.correct;
+    var feedbackEl = document.getElementById("nej-quiz-feedback");
+    Array.prototype.forEach.call(document.querySelectorAll(".nej-quiz-opt"), function (btn) {
+      btn.disabled = true;
+      var i = parseInt(btn.getAttribute("data-i"), 10);
+      if (i === currentQuiz.data.correct) btn.classList.add("nej-correct");
+      else if (i === choiceIndex) btn.classList.add("nej-incorrect");
+    });
+    if (correct) {
+      score += QUIZ_BONUS;
+      if (feedbackEl) feedbackEl.textContent = "Correct! +" + QUIZ_BONUS + " points.";
+    } else if (feedbackEl) {
+      feedbackEl.textContent = "Not quite — back to the run.";
+    }
+    setTimeout(function () {
+      var wrap = document.getElementById("nej-quiz");
+      if (wrap) wrap.style.display = "none";
+      currentQuiz = null;
+      nextQuizScore = Math.floor(score) + QUIZ_SCORE_INTERVAL;
+      if (state === "quiz") state = "playing";
+    }, 1200);
   }
 
   function startGame(classId) {
@@ -139,6 +247,11 @@
     elapsedFrames++;
     speed = BASE_SPEED + Math.min(elapsedFrames / 900, 1) * 3.5;
     score += speed * 0.045;
+
+    if (score >= nextQuizScore) {
+      triggerQuiz();
+      return;
+    }
 
     // physics
     if (!player.onGround) {
@@ -275,11 +388,15 @@
 
   function render() {
     drawBackground();
-    if (state === "playing" || state === "gameover") {
+    if (state === "playing" || state === "gameover" || state === "quiz") {
       drawObstacles();
       drawCollectibles();
       drawPlayer();
       drawHUD();
+    }
+    if (state === "quiz") {
+      ctx.fillStyle = "rgba(10, 11, 15, 0.55)";
+      ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
     }
     if (state === "gameover") {
       drawOverlayBox([
