@@ -1,0 +1,3 @@
+{{- $level := .Get 0 | default "Medium" -}}
+{{- $class := $level | lower -}}
+<span class="severity-badge {{ $class }}">{{ $level }} Severity</span>

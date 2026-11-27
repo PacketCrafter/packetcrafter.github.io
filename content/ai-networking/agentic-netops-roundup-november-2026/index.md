@@ -1,6 +1,7 @@
 ---
 title: "Agentic NetOps, Grounded: What Vendors Actually Mean When They Say 'AI Agent'"
 date: 2026-11-27
+thumbnail: "feature.png"
 showHero: true
 draft: false
 description: "Cisco and HPE/Juniper are both pitching agentic AI for network operations, but they disagree on how much autonomy belongs in the loop. A look at the actual capability claims behind the marketing."
