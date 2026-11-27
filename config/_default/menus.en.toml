@@ -21,6 +21,16 @@
   weight = 30
 
 [[main]]
+  name = "CVE Watch"
+  pageRef = "cve-watch"
+  weight = 35
+
+[[main]]
+  name = "AI Networking"
+  pageRef = "ai-networking"
+  weight = 37
+
+[[main]]
 name = "About"
 pageRef = "about"
 weight = 40
