@@ -1,91 +1,45 @@
 ---
 title: "The Evolution of Connectivity: From CLI to NetDevOps"
 date: 2026-04-05
-thumbnail: "feature.png"
 showHero: true
 draft: false
-tags: ["NetDevOps", "Automation", "CI-CD", "Networking"]
-series: ["Network Architecture"]
-description: "Tracing the shift from manual CLI configuration to software-centric, automated network infrastructure."
+tags: ["NetDevOps", "Automation", "CI/CD", "Networking"]
+description: "Tracing the shift from manual CLI configuration to software-centric, automated network infrastructure — and where the role is headed next."
+showTableOfContents: true
 ---
 
-## The Evolution of Connectivity: From CLI to NetDevOps
-Network engineering has undergone a massive transformation, moving from a world of manual cable-plugging and proprietarycommands to a software-centric discipline.
+## What is NetDevOps?
 
-### What is NetDevOps?
-NetDevOps (Network Operations + Development) is the application of DevOps principles—specifically automation, continuous integration, and continuous delivery—to network infrastructure.
+NetDevOps — network operations plus development — is the application of DevOps principles to network infrastructure: automation, version control, and continuous integration/continuous delivery applied to a domain that, for most of its history, was configured one device at a time by hand.
 
-Instead of configuring switches one by one using a Command Line Interface (CLI), NetDevOps treats the network as code. It focuses on:
+Instead of logging into switches one by one through a CLI, NetDevOps treats the network as code. In practice, that means:
 
-    Infrastructure as Code (IaC): Defining network states in files (YAML, JSON) rather than manual commands.
+* **Infrastructure as Code (IaC):** defining the intended network state in files (YAML, JSON) rather than typing commands into a terminal.
+* **Version control:** tracking every change to that intended state in Git, with a real history and a real diff for every modification.
+* **CI/CD pipelines:** testing and deploying network changes through an automated pipeline, so a bad change gets caught before it reaches production rather than after.
+* **A single source of truth:** a system of record (NetBox and similar tools are common choices) that holds the *intended* state of the network, which automation then reconciles the real devices against.
 
-    Version Control: Using tools like Git to track every change made to the network.
+## Three eras of network engineering
 
-    CI/CD Pipelines: Automatically testing and deploying network changes to ensure they don't break connectivity.
+**The hardware era (1980s–late 1990s).** Networking was a physical-layer discipline. Engineers spent their time crimping cables and configuring bulky, vendor-specific hardware with no real interoperability story. Knowledge of the OSI model was the core skill.
 
-    Single Source of Truth: Maintaining a database (like NetBox) that holds the intended state of the network.
-### A Brief History of Network Engineering
+**The CLI and certification era (2000s–2010s).** As the internet scaled up, so did the "CLI warrior." Changing a VLAN meant logging into dozens of switches by hand, one at a time. Every router ended up with its own slightly different configuration — a snowflake network — which made troubleshooting its own specialty. This era also produced the certification ladder (CCNA, CCNP, CCIE) as the industry's way of validating that skill set.
 
-The journey of the network engineer can be divided into three distinct eras:
-1. The Hardware Era (1980s – Late 1990s)
+**The software-defined era (2015–present).** Virtualization and cloud computing changed the underlying assumptions. Software-Defined Networking decoupled the control plane ("the brains") from the forwarding plane ("the brawn"), which made centralized management possible and opened the door to treating the network as something you program rather than something you configure by hand — NetDevOps.
 
-In the early days, networking was all about the physical layer. Engineers spent their time crimping cables and configuring bulky, expensive hardware. Each vendor had a proprietary operating system, and interoperability was a constant struggle. Knowledge of the OSI Model was the primary skill set.
-2. The CLI & Certification Era (2000s – 2010s)
+## How the role is changing
 
-As the internet exploded, the "CLI Warrior" was born. Network engineers became experts in typing commands into terminal emulators. This era was defined by:
+The shift underway is less "network engineer becomes developer" and more "network engineer becomes systems architect who also writes code." A few contrasts make the shift concrete:
 
-    Manual Configuration: Changing a VLAN meant logging into 50 different switches manually.
+| Aspect | Traditional Networking | Modern NetDevOps |
+|---|---|---|
+| Tooling | SSH, Telnet, console cables | Python, Ansible, Terraform, Git |
+| Change method | Manual CLI entry, copy/paste | Automated pipelines (CI/CD) |
+| Scaling | Linear — more gear means more manual work | Exponential — scripts handle thousands of nodes the same way they handle ten |
+| Visibility | SNMP polling and syslog | Streaming telemetry and dashboards |
 
-    Snowflake Networks: Every router ended up with slightly different configurations, making troubleshooting a nightmare.
+## Where it's headed: intent and AIOps
 
-    The Rise of Certifications: CCNA, CCNP, and CCIE became the gold standards of professional validation.
+The next step beyond "the network is code" is Intent-Based Networking (IBN): an engineer states the desired outcome — "Finance should be able to reach the web server" — and software determines and applies the specific configuration needed across the fabric to make that true, rather than the engineer working out the path hop by hop.
 
-3. The Software-Defined Era (2015 – Present)
-
-Virtualization and Cloud computing changed everything. Software-Defined Networking (SDN) decoupled the "brains" (control plane) from the "brawn" (forwarding plane). This allowed for centralized management and opened the door for NetDevOps.
-
-### How Network Engineering is Evolving
-
- Gemini said
-The Evolution of Connectivity: From CLI to NetDevOps
-
-Network engineering has undergone a massive transformation, moving from a world of manual cable-plugging and proprietary commands to a software-centric discipline.
-What is NetDevOps?
-
-NetDevOps (Network Operations + Development) is the application of DevOps principles—specifically automation, continuous integration, and continuous delivery—to network infrastructure.
-
-Instead of configuring switches one by one using a Command Line Interface (CLI), NetDevOps treats the network as code. It focuses on:
-
-    Infrastructure as Code (IaC): Defining network states in files (YAML, JSON) rather than manual commands.
-
-    Version Control: Using tools like Git to track every change made to the network.
-
-    CI/CD Pipelines: Automatically testing and deploying network changes to ensure they don't break connectivity.
-
-    Single Source of Truth: Maintaining a database (like NetBox) that holds the intended state of the network.
-
-A Brief History of Network Engineering
-
-The journey of the network engineer can be divided into three distinct eras:
-1. The Hardware Era (1980s – Late 1990s)
-
-In the early days, networking was all about the physical layer. Engineers spent their time crimping cables and configuring bulky, expensive hardware. Each vendor had a proprietary operating system, and interoperability was a constant struggle. Knowledge of the OSI Model was the primary skill set.
-2. The CLI & Certification Era (2000s – 2010s)
-
-3. The Software-Defined Era (2015 – Present)
-
-Virtualization and Cloud computing changed everything. Software-Defined Networking (SDN) decoupled the "brains" (control plane) from the "brawn" (forwarding plane). This allowed for centralized management and opened the door for NetDevOps.
-How Network Engineering is Evolving
-
-The role is currently shifting from a builder/operator to a systems architect/programmer. Here is how the landscape is changing:
-Aspect	Traditional Networking	Modern NetDevOps
-Tooling	SSH, Telnet, Console Cables	Python, Ansible, Terraform, Git
-Change Method	Manual CLI entry (Copy/Paste)	Automated Pipelines (CI/CD)
-Scaling	Linear (More gear = More work)	Exponential (Scripts handle thousands of nodes)
-Visibility	SNMP Polling & Syslog	Telemetry, Streaming Data, & AI Dashboards
-
-### The Future: AI Ops and Intent-Based Networking
-
-The next frontier is Intent-Based Networking (IBN). In this model, an engineer tells the network the desired outcome (e.g., "Allow Finance to talk to the Web Server"), and the software automatically determines and applies the necessary configurations across the entire fabric.
-
-As we move into 2026, AIOps (Artificial Intelligence for IT Operations) is also becoming standard, using machine learning to predict outages and automatically "self-heal" the network before users even notice a drop in performance.
+Alongside that, AIOps — machine learning applied to IT operations — is becoming a standard part of the toolchain, used to predict outages from telemetry trends and, in the more mature deployments, trigger a self-healing response before anyone notices degraded performance. Neither of these replaces the skills built up over the CLI era; they change what you spend that judgment on; less time proving a problem exists, more time deciding what the network should do.
