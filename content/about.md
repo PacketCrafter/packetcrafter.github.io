@@ -8,7 +8,9 @@ showTaxonomies: false
 ---
 
 ### Professional Summary
-I am a collaborative and mission-driven Network DevOps Engineer with expertise in troubleshooting, securing, optimizing, and automating networks in fast-paced environments. Based in San Antonio, TX, I'm skilled in cross-functional teamwork and client engagement, delivering tailored solutions aligned with business goals — with a track record spanning wireless implementations, network migrations, and security infrastructure.
+I'm an Enterprise Network DevOps Engineer based in San Antonio, TX, working at the intersection of network engineering, security, and automation. My background started in traditional network operations — wireless and switching deployments, firewall administration, data-center support — and has grown over the past few years into architecture-level and API-driven work: building infrastructure-as-code pipelines against Ansible and GitLab, automating against the Juniper Apstra and Mist APIs, and owning firewall and load-balancer lifecycle end to end. I like taking on the kind of work that replaces a manual, error-prone process with something tested, auditable, and repeatable, while still being comfortable leading a 2 a.m. maintenance window or a hardware RMA when production is on the line.
+
+**Focus areas:** Network Automation · Data Center Networking · Palo Alto · F5 BIG-IP · Juniper Mist/QFX/EX/Apstra · Ansible · GitLab · BGP/OSPF · Network Modernization
 
 ### Core Technical Stack
 * **Network & Automation:** Python, Red Hat Ansible Automation Platform, GitLab, REST APIs, Juniper Mist/Apstra, BGP EVPN/VXLAN, Infrastructure as Code.
